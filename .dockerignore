@@ -1,0 +1,13 @@
+# The CSVs and the SQLite database are bind-mounted, never baked into the image.
+data/
+
+.env
+.git/
+.gitignore
+.venv/
+__pycache__/
+**/__pycache__/
+*.pyc
+notebooks/
+tests/
+README.md

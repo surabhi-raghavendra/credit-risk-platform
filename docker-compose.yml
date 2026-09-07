@@ -1,0 +1,15 @@
+services:
+  app:
+    build: .
+    image: credit-risk-platform
+    container_name: credit-risk-platform
+    env_file: .env
+    environment:
+      # Absolute, so it does not depend on the working directory in the container.
+      DB_PATH: /app/data/credit_risk.db
+    ports:
+      - "8501:8501"
+    volumes:
+      - ./data:/app/data
+      - ./models:/app/models
+    restart: unless-stopped

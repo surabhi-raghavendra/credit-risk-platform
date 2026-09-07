@@ -1,0 +1,7 @@
+data/*.csv
+data/*.db
+models/*.pkl
+models/*.joblib
+.env
+__pycache__/
+.venv/

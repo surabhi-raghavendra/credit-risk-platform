@@ -1,0 +1,15 @@
+# Pinned: the saved model.joblib and preprocessor.joblib are pickles, so the
+# container has to load them with the same versions that wrote them.
+pandas==2.3.3
+numpy==2.2.6
+scikit-learn==1.7.2
+lightgbm==4.7.0
+shap==0.49.1
+joblib==1.5.3
+streamlit==1.62.0
+streamlit-option-menu==0.4.0
+plotly==7.0.0
+kaleido==1.4.0
+python-dotenv==1.2.3
+groq==1.7.0
+sqlglot==30.18.0

@@ -1,0 +1,59 @@
+{
+  "generated_at": "2026-09-05T10:19:26+00:00",
+  "test_rows": 61503,
+  "test_positive_rate_pct": 8.0728,
+  "split": {
+    "test_size": 0.2,
+    "random_state": 42,
+    "cv_folds": 5
+  },
+  "roc_auc": 0.767043,
+  "pr_auc": 0.255467,
+  "at_default_threshold": {
+    "threshold": 0.5,
+    "precision": 0.176042,
+    "recall": 0.671903,
+    "f1": 0.278988,
+    "confusion_matrix": {
+      "true_negative": 40924,
+      "false_positive": 15614,
+      "false_negative": 1629,
+      "true_positive": 3336
+    }
+  },
+  "at_best_f1_threshold": {
+    "threshold": 0.67,
+    "precision": 0.261676,
+    "recall": 0.411883,
+    "f1": 0.320031,
+    "confusion_matrix": {
+      "true_negative": 50768,
+      "false_positive": 5770,
+      "false_negative": 2920,
+      "true_positive": 2045
+    }
+  },
+  "risk_bands": {
+    "thresholds": {
+      "low": 0.3,
+      "high": 0.6
+    },
+    "distribution": {
+      "Low": {
+        "applicants": 25127,
+        "share_pct": 40.85,
+        "actual_default_rate_pct": 2.28
+      },
+      "Medium": {
+        "applicants": 24311,
+        "share_pct": 39.53,
+        "actual_default_rate_pct": 7.17
+      },
+      "High": {
+        "applicants": 12065,
+        "share_pct": 19.62,
+        "actual_default_rate_pct": 21.95
+      }
+    }
+  }
+}

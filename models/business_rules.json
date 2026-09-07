@@ -1,0 +1,625 @@
+{
+  "generated_at": "2026-09-05T10:43:15+00:00",
+  "thresholds": {
+    "low": 0.3,
+    "high": 0.6
+  },
+  "variants": [
+    "standard",
+    "risk_focused"
+  ],
+  "default_variant": "standard",
+  "surrogate": {
+    "fitted_on": "primary model risk bands, training split",
+    "train_rows": 246008,
+    "holdout_rows": 61503,
+    "features": {
+      "EXT_SOURCE_1": "External credit score 1",
+      "EXT_SOURCE_2": "External credit score 2",
+      "EXT_SOURCE_3": "External credit score 3",
+      "age_years": "Age",
+      "years_employed": "Time in current job",
+      "AMT_CREDIT": "Loan amount",
+      "AMT_ANNUITY": "Annual repayment",
+      "AMT_INCOME_TOTAL": "Annual income",
+      "credit_to_income": "Credit-to-income multiple",
+      "annuity_to_income": "Annuity-to-income ratio",
+      "bureau_loan_count": "Bureau loans on file",
+      "bureau_overdue_count": "Prior overdue loans",
+      "previous_application_count": "Previous applications",
+      "previous_approval_rate": "Previous approval rate",
+      "is_retiree_placeholder": "No employment record (retired)"
+    },
+    "missing_value_medians": {
+      "EXT_SOURCE_1": 0.505446,
+      "EXT_SOURCE_2": 0.565913,
+      "EXT_SOURCE_3": 0.535276,
+      "age_years": 43.104723,
+      "years_employed": 4.511978,
+      "AMT_CREDIT": 514777.5,
+      "AMT_ANNUITY": 24903.0,
+      "AMT_INCOME_TOTAL": 147600.0,
+      "credit_to_income": 3.268948,
+      "annuity_to_income": 0.162833,
+      "bureau_loan_count": 4.0,
+      "bureau_overdue_count": 0.0,
+      "previous_application_count": 3.0,
+      "previous_approval_rate": 0.8,
+      "is_retiree_placeholder": 0.0
+    }
+  },
+  "comparison": {
+    "standard": {
+      "label": "Standard (unweighted)",
+      "n_leaves": 16,
+      "holdout_agreement_pct": 66.41,
+      "holdout_agreement_by_band_pct": {
+        "High": 41.06,
+        "Medium": 69.98,
+        "Low": 75.12
+      }
+    },
+    "risk_focused": {
+      "label": "Risk-focused (balanced class weights)",
+      "n_leaves": 16,
+      "holdout_agreement_pct": 62.12,
+      "holdout_agreement_by_band_pct": {
+        "High": 80.73,
+        "Medium": 38.35,
+        "Low": 76.19
+      }
+    }
+  },
+  "standard": {
+    "label": "Standard (unweighted)",
+    "description": "Maximises overall agreement with the primary model's bands. Best when the rules are used as a general-purpose approximation.",
+    "config": {
+      "max_depth": 4,
+      "min_samples_leaf": 500,
+      "class_weight": null,
+      "n_leaves": 16
+    },
+    "fidelity": {
+      "train": {
+        "overall_agreement_pct": 66.24,
+        "by_primary_band": {
+          "High": {
+            "applicants": 49101,
+            "agreement_pct": 40.89
+          },
+          "Medium": {
+            "applicants": 96162,
+            "agreement_pct": 70.2
+          },
+          "Low": {
+            "applicants": 100745,
+            "agreement_pct": 74.82
+          }
+        },
+        "surrogate_band_distribution": {
+          "High": 25123,
+          "Medium": 120560,
+          "Low": 100325
+        }
+      },
+      "holdout": {
+        "overall_agreement_pct": 66.41,
+        "by_primary_band": {
+          "High": {
+            "applicants": 12065,
+            "agreement_pct": 41.06
+          },
+          "Medium": {
+            "applicants": 24311,
+            "agreement_pct": 69.98
+          },
+          "Low": {
+            "applicants": 25127,
+            "agreement_pct": 75.12
+          }
+        },
+        "surrogate_band_distribution": {
+          "High": 6190,
+          "Medium": 30049,
+          "Low": 25264
+        }
+      }
+    },
+    "rules": [
+      {
+        "rule_id": 1,
+        "conditions": [
+          "External credit score 3 <= 0.305",
+          "External credit score 2 <= 0.413",
+          "External credit score 1 <= 0.582"
+        ],
+        "rule": "IF External credit score 3 <= 0.305 AND External credit score 2 <= 0.413 AND External credit score 1 <= 0.582 THEN risk band = High",
+        "predicted_band": "High",
+        "applicants_covered": 10115,
+        "coverage_pct": 4.11,
+        "actual_default_rate_pct": 26.05,
+        "mean_model_probability": 0.7446
+      },
+      {
+        "rule_id": 2,
+        "conditions": [
+          "External credit score 3 is between 0.305 and 0.536",
+          "External credit score 2 <= 0.157"
+        ],
+        "rule": "IF External credit score 3 is between 0.305 and 0.536 AND External credit score 2 <= 0.157 THEN risk band = High",
+        "predicted_band": "High",
+        "applicants_covered": 7560,
+        "coverage_pct": 3.07,
+        "actual_default_rate_pct": 21.59,
+        "mean_model_probability": 0.7001
+      },
+      {
+        "rule_id": 3,
+        "conditions": [
+          "External credit score 3 <= 0.155",
+          "External credit score 2 > 0.413"
+        ],
+        "rule": "IF External credit score 3 <= 0.155 AND External credit score 2 > 0.413 THEN risk band = High",
+        "predicted_band": "High",
+        "applicants_covered": 6455,
+        "coverage_pct": 2.62,
+        "actual_default_rate_pct": 17.94,
+        "mean_model_probability": 0.6485
+      },
+      {
+        "rule_id": 4,
+        "conditions": [
+          "External credit score 3 <= 0.305",
+          "External credit score 2 <= 0.413",
+          "External credit score 1 > 0.582"
+        ],
+        "rule": "IF External credit score 3 <= 0.305 AND External credit score 2 <= 0.413 AND External credit score 1 > 0.582 THEN risk band = High",
+        "predicted_band": "High",
+        "applicants_covered": 993,
+        "coverage_pct": 0.4,
+        "actual_default_rate_pct": 15.81,
+        "mean_model_probability": 0.6212
+      },
+      {
+        "rule_id": 5,
+        "conditions": [
+          "External credit score 3 > 0.536",
+          "External credit score 2 <= 0.258",
+          "Time in current job <= 4.4 years"
+        ],
+        "rule": "IF External credit score 3 > 0.536 AND External credit score 2 <= 0.258 AND Time in current job <= 4.4 years THEN risk band = Medium",
+        "predicted_band": "Medium",
+        "applicants_covered": 3505,
+        "coverage_pct": 1.42,
+        "actual_default_rate_pct": 13.15,
+        "mean_model_probability": 0.5559
+      },
+      {
+        "rule_id": 6,
+        "conditions": [
+          "External credit score 3 is between 0.305 and 0.536",
+          "External credit score 2 is between 0.157 and 0.413"
+        ],
+        "rule": "IF External credit score 3 is between 0.305 and 0.536 AND External credit score 2 is between 0.157 and 0.413 THEN risk band = Medium",
+        "predicted_band": "Medium",
+        "applicants_covered": 24764,
+        "coverage_pct": 10.07,
+        "actual_default_rate_pct": 12.55,
+        "mean_model_probability": 0.5529
+      },
+      {
+        "rule_id": 7,
+        "conditions": [
+          "External credit score 3 is between 0.155 and 0.316",
+          "External credit score 2 > 0.413"
+        ],
+        "rule": "IF External credit score 3 is between 0.155 and 0.316 AND External credit score 2 > 0.413 THEN risk band = Medium",
+        "predicted_band": "Medium",
+        "applicants_covered": 18080,
+        "coverage_pct": 7.35,
+        "actual_default_rate_pct": 11.28,
+        "mean_model_probability": 0.5176
+      },
+      {
+        "rule_id": 8,
+        "conditions": [
+          "External credit score 3 > 0.536",
+          "External credit score 2 <= 0.258",
+          "Time in current job > 4.4 years"
+        ],
+        "rule": "IF External credit score 3 > 0.536 AND External credit score 2 <= 0.258 AND Time in current job > 4.4 years THEN risk band = Medium",
+        "predicted_band": "Medium",
+        "applicants_covered": 6745,
+        "coverage_pct": 2.74,
+        "actual_default_rate_pct": 7.61,
+        "mean_model_probability": 0.414
+      },
+      {
+        "rule_id": 9,
+        "conditions": [
+          "External credit score 3 > 0.536",
+          "External credit score 2 is between 0.258 and 0.496",
+          "Time in current job <= 4.5 years"
+        ],
+        "rule": "IF External credit score 3 > 0.536 AND External credit score 2 is between 0.258 and 0.496 AND Time in current job <= 4.5 years THEN risk band = Medium",
+        "predicted_band": "Medium",
+        "applicants_covered": 7754,
+        "coverage_pct": 3.15,
+        "actual_default_rate_pct": 7.25,
+        "mean_model_probability": 0.4077
+      },
+      {
+        "rule_id": 10,
+        "conditions": [
+          "External credit score 3 is between 0.316 and 0.536",
+          "External credit score 2 is between 0.413 and 0.677"
+        ],
+        "rule": "IF External credit score 3 is between 0.316 and 0.536 AND External credit score 2 is between 0.413 and 0.677 THEN risk band = Medium",
+        "predicted_band": "Medium",
+        "applicants_covered": 57293,
+        "coverage_pct": 23.29,
+        "actual_default_rate_pct": 7.18,
+        "mean_model_probability": 0.4043
+      },
+      {
+        "rule_id": 11,
+        "conditions": [
+          "External credit score 3 > 0.536",
+          "External credit score 2 > 0.496",
+          "External credit score 1 <= 0.258"
+        ],
+        "rule": "IF External credit score 3 > 0.536 AND External credit score 2 > 0.496 AND External credit score 1 <= 0.258 THEN risk band = Medium",
+        "predicted_band": "Medium",
+        "applicants_covered": 2419,
+        "coverage_pct": 0.98,
+        "actual_default_rate_pct": 6.61,
+        "mean_model_probability": 0.3758
+      },
+      {
+        "rule_id": 12,
+        "conditions": [
+          "External credit score 3 > 0.536",
+          "External credit score 2 > 0.496",
+          "External credit score 1 is between 0.258 and 0.335"
+        ],
+        "rule": "IF External credit score 3 > 0.536 AND External credit score 2 > 0.496 AND External credit score 1 is between 0.258 and 0.335 THEN risk band = Low",
+        "predicted_band": "Low",
+        "applicants_covered": 2165,
+        "coverage_pct": 0.88,
+        "actual_default_rate_pct": 4.57,
+        "mean_model_probability": 0.2921
+      },
+      {
+        "rule_id": 13,
+        "conditions": [
+          "External credit score 3 > 0.536",
+          "External credit score 2 is between 0.258 and 0.496",
+          "Time in current job > 4.5 years"
+        ],
+        "rule": "IF External credit score 3 > 0.536 AND External credit score 2 is between 0.258 and 0.496 AND Time in current job > 4.5 years THEN risk band = Low",
+        "predicted_band": "Low",
+        "applicants_covered": 14529,
+        "coverage_pct": 5.91,
+        "actual_default_rate_pct": 4.36,
+        "mean_model_probability": 0.2898
+      },
+      {
+        "rule_id": 14,
+        "conditions": [
+          "External credit score 3 is between 0.316 and 0.536",
+          "External credit score 2 > 0.677"
+        ],
+        "rule": "IF External credit score 3 is between 0.316 and 0.536 AND External credit score 2 > 0.677 THEN risk band = Low",
+        "predicted_band": "Low",
+        "applicants_covered": 22381,
+        "coverage_pct": 9.1,
+        "actual_default_rate_pct": 3.9,
+        "mean_model_probability": 0.2545
+      },
+      {
+        "rule_id": 15,
+        "conditions": [
+          "External credit score 3 > 0.536",
+          "External credit score 2 is between 0.496 and 0.617",
+          "External credit score 1 > 0.335"
+        ],
+        "rule": "IF External credit score 3 > 0.536 AND External credit score 2 is between 0.496 and 0.617 AND External credit score 1 > 0.335 THEN risk band = Low",
+        "predicted_band": "Low",
+        "applicants_covered": 22460,
+        "coverage_pct": 9.13,
+        "actual_default_rate_pct": 3.62,
+        "mean_model_probability": 0.2473
+      },
+      {
+        "rule_id": 16,
+        "conditions": [
+          "External credit score 3 > 0.536",
+          "External credit score 2 > 0.617",
+          "External credit score 1 > 0.335"
+        ],
+        "rule": "IF External credit score 3 > 0.536 AND External credit score 2 > 0.617 AND External credit score 1 > 0.335 THEN risk band = Low",
+        "predicted_band": "Low",
+        "applicants_covered": 38790,
+        "coverage_pct": 15.77,
+        "actual_default_rate_pct": 2.33,
+        "mean_model_probability": 0.1732
+      }
+    ]
+  },
+  "risk_focused": {
+    "label": "Risk-focused (balanced class weights)",
+    "description": "Reweights the bands so the minority High band is not sacrificed. Catches far more high-risk applicants at the cost of overall agreement. Best when a missed default costs more than a false alarm.",
+    "config": {
+      "max_depth": 4,
+      "min_samples_leaf": 500,
+      "class_weight": "balanced",
+      "n_leaves": 16
+    },
+    "fidelity": {
+      "train": {
+        "overall_agreement_pct": 62.18,
+        "by_primary_band": {
+          "High": {
+            "applicants": 49101,
+            "agreement_pct": 79.99
+          },
+          "Medium": {
+            "applicants": 96162,
+            "agreement_pct": 38.62
+          },
+          "Low": {
+            "applicants": 100745,
+            "agreement_pct": 75.99
+          }
+        },
+        "surrogate_band_distribution": {
+          "High": 76868,
+          "Medium": 64826,
+          "Low": 104314
+        }
+      },
+      "holdout": {
+        "overall_agreement_pct": 62.12,
+        "by_primary_band": {
+          "High": {
+            "applicants": 12065,
+            "agreement_pct": 80.73
+          },
+          "Medium": {
+            "applicants": 24311,
+            "agreement_pct": 38.35
+          },
+          "Low": {
+            "applicants": 25127,
+            "agreement_pct": 76.19
+          }
+        },
+        "surrogate_band_distribution": {
+          "High": 19160,
+          "Medium": 16143,
+          "Low": 26200
+        }
+      }
+    },
+    "rules": [
+      {
+        "rule_id": 1,
+        "conditions": [
+          "External credit score 3 <= 0.318",
+          "External credit score 2 <= 0.468",
+          "External credit score 1 <= 0.584"
+        ],
+        "rule": "IF External credit score 3 <= 0.318 AND External credit score 2 <= 0.468 AND External credit score 1 <= 0.584 THEN risk band = High",
+        "predicted_band": "High",
+        "applicants_covered": 13074,
+        "coverage_pct": 5.31,
+        "actual_default_rate_pct": 24.41,
+        "mean_model_probability": 0.7251
+      },
+      {
+        "rule_id": 2,
+        "conditions": [
+          "External credit score 3 is between 0.318 and 0.536",
+          "External credit score 2 <= 0.248"
+        ],
+        "rule": "IF External credit score 3 is between 0.318 and 0.536 AND External credit score 2 <= 0.248 THEN risk band = High",
+        "predicted_band": "High",
+        "applicants_covered": 14288,
+        "coverage_pct": 5.81,
+        "actual_default_rate_pct": 18.17,
+        "mean_model_probability": 0.6514
+      },
+      {
+        "rule_id": 3,
+        "conditions": [
+          "External credit score 3 <= 0.170",
+          "External credit score 2 > 0.468"
+        ],
+        "rule": "IF External credit score 3 <= 0.170 AND External credit score 2 > 0.468 THEN risk band = High",
+        "predicted_band": "High",
+        "applicants_covered": 6748,
+        "coverage_pct": 2.74,
+        "actual_default_rate_pct": 16.72,
+        "mean_model_probability": 0.6293
+      },
+      {
+        "rule_id": 4,
+        "conditions": [
+          "External credit score 3 > 0.536",
+          "External credit score 2 <= 0.153",
+          "Time in current job <= 4.5 years"
+        ],
+        "rule": "IF External credit score 3 > 0.536 AND External credit score 2 <= 0.153 AND Time in current job <= 4.5 years THEN risk band = High",
+        "predicted_band": "High",
+        "applicants_covered": 1567,
+        "coverage_pct": 0.64,
+        "actual_default_rate_pct": 16.27,
+        "mean_model_probability": 0.6168
+      },
+      {
+        "rule_id": 5,
+        "conditions": [
+          "External credit score 3 <= 0.318",
+          "External credit score 2 <= 0.468",
+          "External credit score 1 > 0.584"
+        ],
+        "rule": "IF External credit score 3 <= 0.318 AND External credit score 2 <= 0.468 AND External credit score 1 > 0.584 THEN risk band = High",
+        "predicted_band": "High",
+        "applicants_covered": 1382,
+        "coverage_pct": 0.56,
+        "actual_default_rate_pct": 13.39,
+        "mean_model_probability": 0.5809
+      },
+      {
+        "rule_id": 6,
+        "conditions": [
+          "External credit score 3 is between 0.318 and 0.536",
+          "External credit score 2 is between 0.248 and 0.468"
+        ],
+        "rule": "IF External credit score 3 is between 0.318 and 0.536 AND External credit score 2 is between 0.248 and 0.468 THEN risk band = High",
+        "predicted_band": "High",
+        "applicants_covered": 24616,
+        "coverage_pct": 10.01,
+        "actual_default_rate_pct": 10.87,
+        "mean_model_probability": 0.5147
+      },
+      {
+        "rule_id": 7,
+        "conditions": [
+          "External credit score 3 is between 0.170 and 0.316",
+          "External credit score 2 > 0.468"
+        ],
+        "rule": "IF External credit score 3 is between 0.170 and 0.316 AND External credit score 2 > 0.468 THEN risk band = High",
+        "predicted_band": "High",
+        "applicants_covered": 15193,
+        "coverage_pct": 6.18,
+        "actual_default_rate_pct": 10.72,
+        "mean_model_probability": 0.5039
+      },
+      {
+        "rule_id": 8,
+        "conditions": [
+          "External credit score 3 > 0.536",
+          "External credit score 2 <= 0.153",
+          "Time in current job > 4.5 years"
+        ],
+        "rule": "IF External credit score 3 > 0.536 AND External credit score 2 <= 0.153 AND Time in current job > 4.5 years THEN risk band = Medium",
+        "predicted_band": "Medium",
+        "applicants_covered": 2579,
+        "coverage_pct": 1.05,
+        "actual_default_rate_pct": 9.27,
+        "mean_model_probability": 0.4851
+      },
+      {
+        "rule_id": 9,
+        "conditions": [
+          "External credit score 3 > 0.536",
+          "External credit score 2 is between 0.153 and 0.490",
+          "Time in current job <= 4.5 years"
+        ],
+        "rule": "IF External credit score 3 > 0.536 AND External credit score 2 is between 0.153 and 0.490 AND Time in current job <= 4.5 years THEN risk band = Medium",
+        "predicted_band": "Medium",
+        "applicants_covered": 9465,
+        "coverage_pct": 3.85,
+        "actual_default_rate_pct": 8.03,
+        "mean_model_probability": 0.4303
+      },
+      {
+        "rule_id": 10,
+        "conditions": [
+          "External credit score 3 > 0.536",
+          "External credit score 2 > 0.490",
+          "External credit score 1 <= 0.194"
+        ],
+        "rule": "IF External credit score 3 > 0.536 AND External credit score 2 > 0.490 AND External credit score 1 <= 0.194 THEN risk band = Medium",
+        "predicted_band": "Medium",
+        "applicants_covered": 1100,
+        "coverage_pct": 0.45,
+        "actual_default_rate_pct": 7.91,
+        "mean_model_probability": 0.4201
+      },
+      {
+        "rule_id": 11,
+        "conditions": [
+          "External credit score 3 is between 0.316 and 0.536",
+          "External credit score 2 is between 0.468 and 0.683"
+        ],
+        "rule": "IF External credit score 3 is between 0.316 and 0.536 AND External credit score 2 is between 0.468 and 0.683 THEN risk band = Medium",
+        "predicted_band": "Medium",
+        "applicants_covered": 51682,
+        "coverage_pct": 21.01,
+        "actual_default_rate_pct": 6.83,
+        "mean_model_probability": 0.3915
+      },
+      {
+        "rule_id": 12,
+        "conditions": [
+          "External credit score 3 > 0.536",
+          "External credit score 2 > 0.490",
+          "External credit score 1 is between 0.194 and 0.335"
+        ],
+        "rule": "IF External credit score 3 > 0.536 AND External credit score 2 > 0.490 AND External credit score 1 is between 0.194 and 0.335 THEN risk band = Low",
+        "predicted_band": "Low",
+        "applicants_covered": 3576,
+        "coverage_pct": 1.45,
+        "actual_default_rate_pct": 4.95,
+        "mean_model_probability": 0.3114
+      },
+      {
+        "rule_id": 13,
+        "conditions": [
+          "External credit score 3 > 0.536",
+          "External credit score 2 is between 0.153 and 0.490",
+          "Time in current job > 4.5 years"
+        ],
+        "rule": "IF External credit score 3 > 0.536 AND External credit score 2 is between 0.153 and 0.490 AND Time in current job > 4.5 years THEN risk band = Low",
+        "predicted_band": "Low",
+        "applicants_covered": 18030,
+        "coverage_pct": 7.33,
+        "actual_default_rate_pct": 4.88,
+        "mean_model_probability": 0.3087
+      },
+      {
+        "rule_id": 14,
+        "conditions": [
+          "External credit score 3 is between 0.316 and 0.536",
+          "External credit score 2 > 0.683"
+        ],
+        "rule": "IF External credit score 3 is between 0.316 and 0.536 AND External credit score 2 > 0.683 THEN risk band = Low",
+        "predicted_band": "Low",
+        "applicants_covered": 20658,
+        "coverage_pct": 8.4,
+        "actual_default_rate_pct": 3.8,
+        "mean_model_probability": 0.2489
+      },
+      {
+        "rule_id": 15,
+        "conditions": [
+          "External credit score 3 > 0.536",
+          "External credit score 2 is between 0.490 and 0.617",
+          "External credit score 1 > 0.335"
+        ],
+        "rule": "IF External credit score 3 > 0.536 AND External credit score 2 is between 0.490 and 0.617 AND External credit score 1 > 0.335 THEN risk band = Low",
+        "predicted_band": "Low",
+        "applicants_covered": 23261,
+        "coverage_pct": 9.46,
+        "actual_default_rate_pct": 3.62,
+        "mean_model_probability": 0.2484
+      },
+      {
+        "rule_id": 16,
+        "conditions": [
+          "External credit score 3 > 0.536",
+          "External credit score 2 > 0.617",
+          "External credit score 1 > 0.335"
+        ],
+        "rule": "IF External credit score 3 > 0.536 AND External credit score 2 > 0.617 AND External credit score 1 > 0.335 THEN risk band = Low",
+        "predicted_band": "Low",
+        "applicants_covered": 38789,
+        "coverage_pct": 15.77,
+        "actual_default_rate_pct": 2.33,
+        "mean_model_probability": 0.1732
+      }
+    ]
+  }
+}
